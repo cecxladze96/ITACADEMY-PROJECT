@@ -1,8 +1,6 @@
 
-
 import csv
 FILE_NAME = "account.txt"
-
 
 def Find_user(pin):
     with open(FILE_NAME, "r", encoding="utf-8") as file:
@@ -25,7 +23,7 @@ def Update_balance(pin, New_balance):
         fieldnames = ["pin", "name", "balance"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(rows)    
+        writer.writerows(rows)          
 
 def ATM():
     attempts=0
@@ -55,7 +53,7 @@ def ATM():
 
         choice = input ("აირჩიეთ მოქმედება: ")
         if choice == "1":
-             print(f"მიმდინარე ბალანსი: {balance} ₾")
+             print(f"მიმდინარე ბალანსი: {balance:.2f} ₾")
         elif choice == "2":
             try:
                 amount = float(input("შეიყვანეთ შესატანი თანხა"))
@@ -64,20 +62,25 @@ def ATM():
                 else:
                     balance += amount
                     Update_balance(pin, balance)
-                    print(f"თანხა წარმატებით დაემატა! ახალი ბალანსი: {balance} ₾")
+                    print(f"თანხა წარმატებით დაემატა! ახალი ბალანსი: {balance:.2f} ₾")
             except ValueError:
                     print("შეიყვანეთ სწორი რიცხვი!")
         elif choice == "3":
             try:
-                amount = float(input("შეიყვანეთ გამოსატანი თანხა"))
+                amount = float(input("შეიყვანეთ გამოსატანი თანხა: ")) 
                 if amount<=0 :
-                    print("შეიყვანეთ დადებითი თანხა!") 
-                elif amount > balance:
-                    print("არასაკმარისი ბალანსი!")    
+                   print("შეიყვანეთ დადებითი თანხა!") 
+                   continue
+                fee = amount * 0.001
+                total = amount + fee
+                if total > balance:
+                   print("არასაკმარისი ბალანსი!") 
+                   continue
                 else:
-                    balance -= amount
+                    balance -= total
                     Update_balance(pin, balance)
-                    print(f"თანხა წარმატებით განაღდა! ახალი ბალანსი: {balance} ₾")
+                    print(f"თანხა წარმატებით განაღდა! საკომისიო: {fee:.2f} ₾")
+                    print(f"ახალი ბალანსი: {balance:.2f} ₾")
             except ValueError:
                     print("შეიყვანეთ სწორი რიცხვი!")    
 
