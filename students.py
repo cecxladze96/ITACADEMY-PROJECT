@@ -61,10 +61,8 @@ class StudentManager:
             self._students.append(student)
             print("სტუდენტი დაემატა წარმატებით!\n")
             self.display_all_students()
-        except ValueError as e:
-            print("შეცდომა: ქულა უნდა იყოს 0-დან 100-მდე.\n")
-        except TypeError as e:
-           print("შეცდომა: ქულა უნდა იყოს რიცხვი.\n")   
+        except (ValueError, TypeError):
+            print("შეცდომა: ქულა უნდა იყოს რიცხვი :0-დან 100-მდე.\n")
 
     def display_all_students(self):
       if not self._students:
@@ -111,10 +109,8 @@ class StudentManager:
              self.print_table_header()
              print(f"{student.roll_number:<10} {student.name:<20} {student.grade:<10}")
 
-           except ValueError as e:
-                print(f"შეცდომა: ქულა უნდა იყოს 0-დან 100-მდე.\n")
-           except TypeError as e:
-                print(f"შეცდომა: ქულა უნდა იყოს რიცხვი.\n")       
+           except (ValueError, TypeError):
+            print("შეცდომა: ქულა უნდა იყოს რიცხვი :0-დან 100-მდე.\n")     
            return
        if not found:
           print("სტუდენტი ვერ მოიძებნა.\n")
@@ -149,3 +145,4 @@ def main():
 
 
 main()
+
