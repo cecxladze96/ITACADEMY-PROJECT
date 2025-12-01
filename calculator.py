@@ -18,21 +18,23 @@ def calculator():
 
  if operation == "+":
    result = num1 +num2
-   print(f"შედეგი: {result}")
+   
  elif operation == "-":
    result = num1 - num2
-   print(f"შედეგი: {result}")
+   
  elif operation == "*":
-   result = num1 +num2
-   print(f"შედეგი: {result}") 
+   result = num1 * num2
+   
  elif operation == "/":
    if num2 == 0:
     print("შეცდომა: ნულზე გაყოფა შეუძლებელია.")
-   else:
-    result = num1/num2
-    print(f"შედეგი: {result}")     
+    return
+   result = num1/num2        
  else:
-        print("არასწორი ოპერაციის არჩევანი.")    
+   print("არასწორი ოპერაციის არჩევანი.")
+   return    
 
+ result = round(result, 2)  
+ print(f"შედეგი: {result}")
+calculator()        
 
-calculator()       
